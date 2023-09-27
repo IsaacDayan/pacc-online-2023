@@ -45,7 +45,7 @@ def cat_flow():
 
 @flow
 def flow_with_subflows():
-    fetch_weather()
+    fetch_weather(11,22)
     cat_flow()
 
 
