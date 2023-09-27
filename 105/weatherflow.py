@@ -32,5 +32,23 @@ def fetch_weather(lat: float, lon: float):
     mark_it_down(most_recent_temp)
 
 
-if __name__ == "__main__":
-    fetch_weather(38.9, -77.0)
+@task
+def fetch_cat_fact():
+    return httpx.get("https://catfact.ninja/fact?max_length=140").json()["fact"]
+
+
+@flow
+def cat_flow():
+    cat = fetch_cat_fact()
+    print(f"cat fact is {cat}")
+
+
+@flow
+def flow_with_subflows():
+    fetch_weather()
+    cat_flow()
+
+
+
+# if __name__ == "__main__":
+#     fetch_weather(38.9, -77.0)
